@@ -1,7 +1,10 @@
 ---
-- name: Run the module with dynamic pointer
-  # 1. Use 'ansible.builtin.action' to stop Ansible from prepending 'osac.demo.'
-  ansible.builtin.action: "{{ fancy_echo_v1_driver | default('osac.demo.fancy_echo_v1') }}"
-  args:
-    msg: "{{ lookup('template', 'message.j2') }}"
-  register: output
+- name: Run the dynamic driver
+  # We call a role based on a variable.
+  # Default: We call ourselves (osac.demo.shadow_test), but we need a specific task file
+  include_role:
+    name: "{{ provider_driver_role | default('osac.demo.shadow_test') }}"
+    tasks_from: "{{ provider_driver_task | default('driver_default.yml') }}"
+  vars:
+    # Pass the message down to the driver
+    driver_msg: "{{ lookup('template', 'message.j2') }}"

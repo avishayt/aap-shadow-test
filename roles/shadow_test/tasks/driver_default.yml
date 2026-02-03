@@ -1,0 +1,6 @@
+---
+- name: Vendor Default Execution
+  # This uses the vendor's internal module
+  fancy_echo_v1:
+    msg: "{{ driver_msg }}"
+  register: output
