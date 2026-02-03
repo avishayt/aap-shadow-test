@@ -1,6 +1,7 @@
 ---
 - name: Run the module with dynamic pointer
-  action: "{{ fancy_echo_v1_driver | default('fancy_echo_v1') }}"
+  # 1. Use 'ansible.builtin.action' to stop Ansible from prepending 'osac.demo.'
+  ansible.builtin.action: "{{ fancy_echo_v1_driver | default('osac.demo.fancy_echo_v1') }}"
   args:
     msg: "{{ lookup('template', 'message.j2') }}"
   register: output
