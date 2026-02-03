@@ -1,0 +1,14 @@
+---
+- name: Vendor Deployment (no override)
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  collections:
+    - osac.demo
+
+  tasks:
+    - import_role:
+        name: osac.demo.shadow_test
+      vars:
+        my_name: "Vendor Demo"
