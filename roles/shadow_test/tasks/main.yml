@@ -1,11 +1,8 @@
 ---
-- name: Run the module with template input
-  # Notice: We use the SHORT name. 
-  # This allows the customer to override it later!
-  fancy_echo_v1:
+- name: Run the module with dynamic pointer
+  action:
+    # 1. We define a pointer variable.
+    # 2. We default it to our internal module ('fancy_echo_v1').
+    module: "{{ fancy_echo_v1_driver | default('fancy_echo_v1') }}"
     msg: "{{ lookup('template', 'message.j2') }}"
   register: output
-
-- name: Show the output
-  debug:
-    msg: "{{ output.result_msg }}"
