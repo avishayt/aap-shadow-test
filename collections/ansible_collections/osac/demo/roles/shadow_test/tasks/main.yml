@@ -2,7 +2,7 @@
 - name: Run the module with template input
   # Notice: We use the SHORT name. 
   # This allows the customer to override it later!
-  fancy_echo:
+  fancy_echo_v1:
     msg: "{{ lookup('template', 'message.j2') }}"
   register: output
 
