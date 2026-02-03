@@ -3,8 +3,8 @@
   # We call a role based on a variable.
   # Default: We call ourselves (osac.demo.shadow_test), but we need a specific task file
   include_role:
-    name: "{{ provider_driver_role | default('osac.demo.shadow_test') }}"
-    tasks_from: "{{ provider_driver_task | default('driver_default.yml') }}"
+    name: "{{ fancy_echo_driver_role | default('osac.demo.shadow_test') }}"
+    tasks_from: "{{ fancy_echo_driver_task | default('driver_default.yml') }}"
   vars:
     # Pass the message down to the driver
     driver_msg: "{{ lookup('template', 'message.j2') }}"
