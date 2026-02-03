@@ -9,7 +9,7 @@
 
   tasks:
     - name: Run the module with template input
-      fancy_echo:
+      fancy_echo_v1:
         # 'lookup' renders the template file into a string right here
         msg: "{{ lookup('template', 'templates/message.j2') }}"
       register: output
