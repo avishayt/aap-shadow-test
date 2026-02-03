@@ -1,8 +1,6 @@
 ---
 - name: Run the module with dynamic pointer
-  action:
-    # 1. We define a pointer variable.
-    # 2. We default it to our internal module ('fancy_echo_v1').
-    module: "{{ fancy_echo_v1_driver | default('fancy_echo_v1') }}"
+  action: "{{ fancy_echo_v1_driver | default('fancy_echo_v1') }}"
+  args:
     msg: "{{ lookup('template', 'message.j2') }}"
   register: output
