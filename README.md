@@ -1,24 +1,22 @@
-# osac.demo – Shadow test collection
+# aap-shadow-test
 
-Simple flow collection for testing the osac-templates / playbook pattern.
+Vendor repo: collection `osac.demo` with a simple flow (operate_v1 → output_v1).
 
-## Flow
+## Layout
 
-Two steps in sequence (like [playbook_cloudkit_create_compute_instance](https://github.com/mhrivnak/osac-aap/blob/sketch-reimagine-vm-playbook/playbook_cloudkit_create_compute_instance.yml)):
+The collection lives under **ansible_collections/osac/demo/** so Ansible finds it when the playbook runs from repo root (e.g. in AAP at `/runner/project/`).
 
-1. **operate_v1** – Add two numbers (`number_a` + `number_b`), set `operate_result`.
-2. **output_v1** – Echo the result from operate_v1.
+- **ansible.cfg** – `collections_path = .` so `./ansible_collections/osac/demo/` is used.
+- **site.yml** – Playbook at repo root; run from here.
+- **ansible_collections/osac/demo/** – Collection content (galaxy.yml, roles/shadow_test, README).
 
-## Input
+## Run
 
-- **number_a**, **number_b** – Two numbers (play vars or `template_parameters.number_a` / `template_parameters.number_b`).
-
-## Usage
+From repo root:
 
 ```bash
 ansible-playbook site.yml
-# With extra vars:
 ansible-playbook site.yml -e number_a=10 -e number_b=5
 ```
 
-In AAP, pass `template_parameters: { number_a: 10, number_b: 5 }` (or equivalent) to override defaults.
+In AAP, use this repo as the project; the job runs from repo root and finds the collection via `ansible.cfg`.
