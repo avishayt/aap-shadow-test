@@ -1,0 +1,8 @@
+---
+- name: operate_v1 - Add the two numbers
+  set_fact:
+    operate_result: "{{ number_a | int + number_b | int }}"
+
+- name: operate_v1 - Record result for next step
+  debug:
+    msg: "operate_v1 result: {{ operate_result }}"

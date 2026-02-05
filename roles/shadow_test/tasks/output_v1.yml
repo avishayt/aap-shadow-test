@@ -1,0 +1,4 @@
+---
+- name: output_v1 - Echo the result from operate_v1
+  debug:
+    msg: "output_v1: {{ operate_result }}"

@@ -1,0 +1,4 @@
+---
+# Input: two numbers (can be overridden by playbook vars or template_parameters)
+number_a: 0
+number_b: 0
