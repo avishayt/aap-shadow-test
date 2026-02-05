@@ -1,25 +1,4 @@
 ---
-# Simple flow: operate_v1 (add two numbers) -> output_v1 (echo result)
-# Pattern follows playbook_cloudkit_create_compute_instance.yml: vars then sequence of steps
-- name: Shadow test flow
-  hosts: localhost
-  gather_facts: false
-
-  vars:
-    # Input: two numbers (override with template_parameters in AAP if desired)
-    number_a: "{{ (template_parameters | default({})).number_a | default(1) }}"
-    number_b: "{{ (template_parameters | default({})).number_b | default(2) }}"
-
-  collections:
-    - osac.demo
-
-  tasks:
-    - name: Step 1 - operate_v1
-      include_role:
-        name: osac.demo.shadow_test
-        tasks_from: operate_v1.yml
-
-    - name: Step 2 - output_v1
-      include_role:
-        name: osac.demo.shadow_test
-        tasks_from: output_v1.yml
+# Run vendor flow with no overrides (import from collection)
+- name: Run vendor flow
+  ansible.builtin.import_playbook: osac.demo.site

@@ -1,0 +1,30 @@
+---
+# Single flow definition: operate_v1 -> output_v1. Override steps via vars when importing.
+- name: Shadow test flow
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    add_role_default:
+      name: osac.demo.shadow_test
+      tasks_from: operate_v1.yml
+    output_role_default:
+      name: osac.demo.shadow_test
+      tasks_from: output_v1.yml
+
+    number_a: "{{ (template_parameters | default({})).number_a | default(1) }}"
+    number_b: "{{ (template_parameters | default({})).number_b | default(2) }}"
+
+  collections:
+    - osac.demo
+
+  tasks:
+    - name: Step 1 - operate_v1
+      include_role:
+        name: "{{ (add_role_override | default(add_role_default)).name }}"
+        tasks_from: "{{ (add_role_override | default(add_role_default)).tasks_from }}"
+
+    - name: Step 2 - output_v1
+      include_role:
+        name: "{{ (output_role_override | default(output_role_default)).name }}"
+        tasks_from: "{{ (output_role_override | default(output_role_default)).tasks_from }}"
